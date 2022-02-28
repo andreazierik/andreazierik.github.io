@@ -8,13 +8,14 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Erik Andreazi',
   tagline: 'Base de conhecimento',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://andreazierik.github.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'andreazierik', // Usually your GitHub org/user name.
-  projectName: 'docs', // Usually your repo name.
+  projectName: 'andreazierik.github.io', // Usually your repo name.
+  trailingSlash: false,
 
   presets: [
     [
@@ -93,7 +94,7 @@ const config = {
               },
             ],
           },
-          {
+          /*{
             title: 'More',
             items: [
               {
@@ -105,7 +106,7 @@ const config = {
                 href: 'https://github.com/facebook/docusaurus',
               },
             ],
-          },
+          },*/
         ],
         copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       },
