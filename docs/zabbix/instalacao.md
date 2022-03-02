@@ -3,6 +3,11 @@ sidebar_position: 1
 title: Instalação do Zabbix no formato modular
 description: Instalação no formato modular
 ---
+<head>
+    <meta charset="UTF-8" />
+    <meta name="description" context="Instalação modular do Zabbix 5.0 LTS" />
+    <meta name="keywords" context="Zabbix, 5.0, LTS, modular" />
+</head>
 
 Nesse tutorial vamos utilizar 3 máquinas.
 
@@ -16,7 +21,7 @@ Utilizei a distribuição AlmaLinux 8.5. SELinux e IPv6 estão desabilitados.
 | 192.168.10.252 | Back-end       | Zabbix Server                      |
 | 192.168.10.253 | Banco de dados | Armazenar as informações do Zabbix |
 
-Vamos começar com a instalação e configuração do Banco de dados.
+## Instalando Banco de dados.
 
 :::info
 O Banco de dados suportado pelo Zabbix é o MySQL e PostgreSQL.
@@ -30,7 +35,7 @@ dnf install mysql-server -y
 systemctl enable --now mysqld
 ```
 
-Após efetuar a instalação do MySQL, vamos configurar:
+### Aplicando configurações de segurança no MySQL
 ```bash
 mysql_secure_installation
 
@@ -67,7 +72,7 @@ Remove test database and access to it? (Press y|Y for Yes, any other key for No)
 Reload privilege tables now? (Press y|Y for Yes, any other key for No) : Yes
 ```
 
-Vamos acessar o MySQL, criar o banco de dados e usuários do Zabbix
+### Criando a base de dados e usuários do Zabbix
 
 ```bash
 mysql -uroot -p
@@ -80,23 +85,9 @@ mysql> GRANT ALL PRIVILEGES ON zabbix.* to 'zabbix_srv'@192.168.10.252;
 mysql> GRANT select, update, delete, insert ON zabbix.* TO 'zabbix_web'@192.168.10.251;
 ```
 
-Finalizada a instalão e configuração do Banco de dados, vamos começar a instalar o Zabbix Front-end.
-Acessa a máquina 192.168.10.251
+Finalizada a instalão e configuração do Banco de dados, partiremos para instalação do Zabbix Back-end.
 
-```bash
-rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/8/x86_64/zabbix-release-5.0-1.el8.noarch.rpm
-dnf clean all
-
-dnf install zabbix-web-mysql zabbix-apache-conf -y
-
-vim /etc/php-fpm.d/zabbix.conf
-; php_value[data.timezone] = Europe/Riga # descomentar e alterar para America/Sao_Paulo
-
-systemctl restart httpd php-fpm
-systemctl enable htppd php-fpm
-```
-
-Partiremos para instalação do Zabbix Server, na máquina 192.168.10.252
+## Instalação do Back-end
 
 ```bash
 rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/8/x86_64/zabbix-release-5.0-1.el8.noarch.rpm
@@ -116,6 +107,23 @@ DBPassword=(Senha definida)
 systemctl restart zabbix-server zabbix-agent
 systemctl enable zabbix-server zabbix-agent
 ```
+
+## Instalação do Front-end
+
+```bash
+rpm -Uvh https://repo.zabbix.com/zabbix/5.0/rhel/8/x86_64/zabbix-release-5.0-1.el8.noarch.rpm
+dnf clean all
+
+dnf install zabbix-web-mysql zabbix-apache-conf -y
+
+vim /etc/php-fpm.d/zabbix.conf
+; php_value[data.timezone] = Europe/Riga # descomentar e alterar para America/Sao_Paulo
+
+systemctl restart httpd php-fpm
+systemctl enable htppd php-fpm
+```
+
+
 
 Acesse, via browser, o IP 192.168.10.251/zabbix. A tela de boas vindas, com o Wizard de instalação será exibida.
 Basta passarmos as informações de acesso:
