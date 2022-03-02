@@ -4,7 +4,6 @@ title: Instalação do Zabbix no formato modular
 description: Instalação no formato modular
 ---
 <head>
-    <meta charset="UTF-8" />
     <meta name="description" context="Instalação modular do Zabbix 5.0 LTS" />
     <meta name="keywords" context="Zabbix, 5.0, LTS, modular" />
 </head>
@@ -85,7 +84,7 @@ mysql> GRANT ALL PRIVILEGES ON zabbix.* to 'zabbix_srv'@192.168.10.252;
 mysql> GRANT select, update, delete, insert ON zabbix.* TO 'zabbix_web'@192.168.10.251;
 ```
 
-Finalizada a instalão e configuração do Banco de dados, partiremos para instalação do Zabbix Back-end.
+Finalizada a instalação e configuração do Banco de dados, partiremos para instalação do Zabbix Back-end.
 
 ## Instalação do Back-end
 
@@ -123,15 +122,13 @@ systemctl restart httpd php-fpm
 systemctl enable htppd php-fpm
 ```
 
-
-
 Acesse, via browser, o IP 192.168.10.251/zabbix. A tela de boas vindas, com o Wizard de instalação será exibida.
 Basta passarmos as informações de acesso:
 
-![Zabbix DB Connection](/img/zabbix_db_connection.png)
+![Zabbix DB Connection](/img/zabbix/zabbix_db_connection.png)
 
-![Zabbix Server Details](/img/zabbix_server_details.png)
+![Zabbix Server Details](/img/zabbix/zabbix_server_details.png)
 
 Se tudo der certo será exibida uma tela informando que a instalação do Zabbix Front-end foi bem sucedida
 
-![You have successfully installed Zabbix frontend](/img/finish_install.png)
+![You have successfully installed Zabbix frontend](/img/zabbix/finish_install.png)
