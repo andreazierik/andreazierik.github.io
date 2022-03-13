@@ -16,7 +16,7 @@ Utilizei a distribuição AlmaLinux 8.5. SELinux e IPv6 estão desabilitados.
 
 | IP             | Nome           | Descrição                          |
 | -------------- | -------------- | ---------------------------------- |
-| 192.168.10.251 | Front-end      | Web Server e Front-end do Zabbix |
+| 192.168.10.251 | Front-end      | Web Server e Front-end do Zabbix   |
 | 192.168.10.252 | Back-end       | Zabbix Server                      |
 | 192.168.10.253 | Banco de dados | Armazenar as informações do Zabbix |
 
