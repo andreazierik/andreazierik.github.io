@@ -40,22 +40,25 @@ ssh-copy-id user@host
 
 Basta realizar login normalmente com ```ssh user@host```
 
-### Desativar login utilizando senha
+:::info
+Efetuar as próximas etapas após importar a chave e garantir o funcionamento.   
+Todas as alterações serão feitas no arquivo vim ***/etc/ssh/sshd_config***
+:::
+
+###  Alterar os parâmetros de autenticação
 
 ```bash
-vim /etc/ssh/sshd_config
-
-PubkeyAuthentication yes
-
-PermitEmptyPasswords no
-```
-
-### Desativar login com root
-
-```bash
-vim /etc/ssh/sshd_config
-
 PermitRootLogin no
-ChallengeResponseAuthentication no
+MaxAuthTries 3
+PubkeyAuthentication yes
+PermitEmptyPasswords no
 PasswordAuthentication no
+ChallengeResponseAuthentication no
+AllowUsers (NOME DOS USUÁRIOS PERMITIDOS PELO LOGIN)
+ClientAliveInterval 600 (tempo em segundos)
 ```
+
+:::tip
+Alterar a porta padrão do SSH ou utilizar regras no firewall apontando para outro porta.   
+Isso aumenta ainda mais a segurança.
+:::
